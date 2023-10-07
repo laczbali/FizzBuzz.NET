@@ -1,4 +1,4 @@
-﻿using FizzBuzzApp;
+﻿using FizzBuzzApp.FizzBuzz;
 
 var fbExec = new FizzBuzzExecutor(15, prependIndex: false)
     .AddProcessor((x) => x % 3 == 0 ? "Fizz" : null)

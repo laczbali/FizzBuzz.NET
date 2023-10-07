@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace FizzBuzzApp
+namespace FizzBuzzApp.FizzBuzz
 {
     public class FizzBuzzEnumerator : IEnumerator<string>
     {

@@ -1,0 +1,1 @@
+FizzBuzz, in an easily configurable form
