@@ -9,17 +9,23 @@ namespace FizzBuzzApp.FizzBuzz
 
         private readonly bool prependIndex;
         private readonly List<Func<int, string?>> processors;
-
+        private readonly Func<int, string> defaultAction;
         private int currentIndex = 0;
         private string currentState = string.Empty;
 
-        public FizzBuzzEnumerator(int start, int end, bool prependIndex, List<Func<int, string?>> processors)
+        public FizzBuzzEnumerator(
+            int start,
+            int end,
+            bool prependIndex,
+            List<Func<int, string?>> processors,
+            Func<int, string>? defaultAction = null)
         {
             this.startIndex = start - 1;
             this.endIndex = end;
 
             this.prependIndex = prependIndex;
             this.processors = processors;
+            this.defaultAction = defaultAction ?? GetIndexStr;
 
             Reset();
         }
@@ -57,7 +63,7 @@ namespace FizzBuzzApp.FizzBuzz
                 state += processor(index) ?? string.Empty;
             }
 
-            state = state == string.Empty ? GetIndexStr(index) : state;
+            state = state == string.Empty ? defaultAction(index) : state;
             state = this.prependIndex ? $"{GetIndexStr(index)}: {state}" : state;
 
             return state;

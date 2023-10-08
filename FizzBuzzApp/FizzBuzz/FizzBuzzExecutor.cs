@@ -9,6 +9,7 @@ namespace FizzBuzzApp.FizzBuzz
         private readonly bool prependIndex;
 
         private List<Func<int, string?>> processors = new List<Func<int, string?>>();
+        private Func<int, string>? defaultAction = null;
 
         public FizzBuzzExecutor(int end, int start = 1, bool prependIndex = false)
         {
@@ -23,9 +24,15 @@ namespace FizzBuzzApp.FizzBuzz
             return this;
         }
 
+        public FizzBuzzExecutor SetDefaultAction(Func<int, string> defaultAction)
+        {
+            this.defaultAction = defaultAction;
+            return this;
+        }
+
         public IEnumerator<string> GetEnumerator()
         {
-            return new FizzBuzzEnumerator(this.start, this.end, prependIndex, this.processors);
+            return new FizzBuzzEnumerator(this.start, this.end, prependIndex, this.processors, this.defaultAction);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
